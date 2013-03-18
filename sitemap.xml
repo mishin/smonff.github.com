@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
+    <url>
+        <loc>http://smonff.github.com/blog/2013/03/11/hello-world/</loc>
+        <lastmod>2013-03-18T21:42:30+01:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://smonff.github.com/blog/2013/03/18/need-a-markdown-editor-for-android-with-github-support/
+        </loc>
+        <lastmod>2013-03-18T23:16:01+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://smonff.github.com/blog/2013/03/19/post-google-rss-reader-era/</loc>
+        <lastmod>2013-03-18T23:35:53+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://smonff.github.com/blog/archives/</loc>
+        <lastmod>2013-03-18T23:35:53+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://smonff.github.com/robots.txt</loc>
+        <lastmod>2013-03-18T21:42:30+01:00</lastmod>
+    </url>
+    <url>
+        <loc>http://smonff.github.com/</loc>
+        <lastmod>2013-03-18T23:35:53+01:00</lastmod>
+    </url>
+</urlset>
