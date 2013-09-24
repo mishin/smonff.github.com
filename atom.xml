@@ -4,7 +4,7 @@
   <title><![CDATA[Smonff Shurfs]]></title>
   <link href="http://smonff.github.com/atom.xml" rel="self"/>
   <link href="http://smonff.github.com/"/>
-  <updated>2013-06-16T14:23:40+02:00</updated>
+  <updated>2013-09-24T22:10:52+02:00</updated>
   <id>http://smonff.github.com/</id>
   <author>
     <name><![CDATA[Smonff]]></name>
@@ -14,13 +14,104 @@
 
   
   <entry>
+    <title type="html"><![CDATA[How to log easily with Log::Minimal and File::Stamped]]></title>
+    <link href="http://smonff.github.com/blog/2013/09/24/how-to-log-easily-with-log-minimal-and-file-stamped/"/>
+    <updated>2013-09-24T18:00:00+02:00</updated>
+    <id>http://smonff.github.com/blog/2013/09/24/how-to-log-easily-with-log-minimal-and-file-stamped</id>
+    <content type="html"><![CDATA[<p>We love logs because it helps us to debug during development. We also need a quick way to enable / disable logs because it&#8217;s not necessary for everybody :</p>
+
+<ul>
+<li>you maybe want logs during the development of your module</li>
+<li>people who will use it don&#8217;t <em>necessary</em> want to watch it</li>
+</ul>
+
+
+<p>When testing a module and building a distribution, you maybe don&#8217;t want to inject <em>dirt</em> in your tests output. In the case of debuging, I think it&#8217;s a good thing to write it to a file and <code>tail</code> on it.</p>
+
+<p>We&#8217;re gonna use two CPAN&#8217;s modules, <a href="https://metacpan.org/module/Log::Minimal">Log::Minimal</a>, a <em>minimal but custimizable logger</em> and <a href="https://metacpan.org/module/File::Stamped">File::Stamped</a>, that allows <em>stamped log file</em>. They are not supposed to be build together, but Tokuhiro Matsuno(File::Stamped creator) recommend Log::Minimal in a code example.</p>
+
+<p>My aim was to create a log system for the debug moment, because I was boring of using <code>p()</code> function from <a href="https://metacpan.org/module/Data::Printer">Data::Printer</a> during my development and tests, because it was a bad thing: I was constantly adding and moving debug-print code, that is a bad practice. I took a look at CPAN and Stack Overflow for some logging solutions, and <a href="https://metacpan.org/module/Log::Log4perl">Log::Log4Perl</a> seems to be a recommended solution for most of serious apps. But it seems to much complicated to me, I don&#8217;t want to manage a new conf file, etc.</p>
+
+<p>As <code>Log::Minimal</code> seems to be really simple, I&#8217;ve installed and was very satisfacted very quickly. Now, We are going to see how to use it to create a temporary file that will contain my traces.</p>
+
+<figure class='code'><figcaption><span>Install the modules :D</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cpanm Log::Minimal File::Stamped
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Log some stuff to a file</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="nn">Log::</span><span class="n">Minimal</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nn">File::</span><span class="n">Stamped</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ENV</span><span class="p">{</span><span class="n">LM_DEBUG</span><span class="p">}</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="k">my</span> <span class="nv">$tmp</span> <span class="o">=</span> <span class="s">&#39;/tmp&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">my</span> <span class="nv">$log_fh</span> <span class="o">=</span> <span class="nn">File::</span><span class="n">Stamped</span><span class="o">-&gt;</span><span class="k">new</span><span class="p">(</span>
+</span><span class='line'>  <span class="n">pattern</span> <span class="o">=&gt;</span> <span class="s">&quot;$tmp/log.%Y-%m-%d.out&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'>  
+</span><span class='line'><span class="c1"># Overrides Log::Minimal PRINT method</span>
+</span><span class='line'><span class="nv">$</span><span class="nn">Log::Minimal::</span><span class="nv">PRINT</span> <span class="o">=</span> <span class="k">sub </span><span class="p">{</span>
+</span><span class='line'>  <span class="k">my</span> <span class="p">(</span> <span class="nv">$time</span><span class="p">,</span> <span class="nv">$type</span><span class="p">,</span> <span class="nv">$message</span><span class="p">,</span> <span class="nv">$trace</span><span class="p">)</span> <span class="o">=</span> <span class="nv">@_</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Removed $trace because it was too long in my environment</span>
+</span><span class='line'>  <span class="k">print</span> <span class="p">{</span><span class="nv">$log_fh</span><span class="p">}</span> <span class="s">&quot;$time [$type] $message\n&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">debugf</span><span class="p">(</span><span class="s">&quot;My::Module debugger init.&quot;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you <code>tail</code> to <code>/tmp/log.2013-09-24.out</code> from your terminal during your module tests&#8230;</p>
+
+<figure class='code'><figcaption><span>tail</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>tail -vf /tmp/log.2013-09-24.out
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&#8230; it will log the following :</p>
+
+<figure class='code'><figcaption><span>out</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>2013-09-24T19:28:38 [DEBUG] My::Module debugger init.
+</span><span class='line'>2013-09-24T19:28:39 [DEBUG] Other
+</span><span class='line'>2013-09-24T19:28:39 [DEBUG] interestant
+</span><span class='line'>2013-09-24T19:28:39 [DEBUG] things...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That was a very <em>minimal</em> blog post, but I hope it will be usefull.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Post-Google RSS Reader era]]></title>
     <link href="http://smonff.github.com/blog/2013/03/19/post-google-rss-reader-era/"/>
     <updated>2013-03-19T14:29:00+01:00</updated>
     <id>http://smonff.github.com/blog/2013/03/19/post-google-rss-reader-era</id>
     <content type="html"><![CDATA[<p>Hey, <a href="http://googleblog.blogspot.fr/2013/03/a-second-spring-of-cleaning.html">Google announce it will close it&#8217;s RSS <em>Reader</em></a>.
-So what? Do we really need it anyway? You can find plenty of friendly and beautiful clones of <em>Reader</em>, like <a href="http://feedly.com">Feedly</a>
-or <a href="http://theoldreader.com/">The Old Reader</a>. Both of two seems nice. Both of two are clearly Readers clones and alternatives.</p>
+So what? Do we really need it anyway? You can find <a href="http://www.johndcook.com/blog/2013/03/14/rss-readers-on-linux/">plenty of friendly and beautiful clones of <em>Reader</em></a>, like <a href="http://feedly.com">Feedly</a> or <a href="http://theoldreader.com/">The Old Reader</a>. Both of two seems nice. Both of two are clearly Readers clones and alternatives.</p>
 
 <p>I first tryed <em>The Old Reader</em> for about a month, before all the <em>Reader</em> drama when Google announce it&#8217;s death. It was so slow
 that I was feeling asleep as waiting for a feed to load. I don&#8217;t notice anything particular in comparaison with Reader. The only thing is that you got some more hype <a href="https://en.wikipedia.org/wiki/Ajax_(programming">AJAX stuff</a> plus some special <em>social bits</em> that makes possible to share more fecal feeds with your friends. Just as if your friends weren&#8217;t full-time busy by their own feeds.</p>
