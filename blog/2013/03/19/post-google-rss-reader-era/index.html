@@ -19,7 +19,7 @@ So what? Do we really need it anyway? You can find plenty of friendly and beauti
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://smonff.github.com/blog/2013/03/19/post-google-rss-reader-era">
+  <link rel="canonical" href="http://smonff.github.io/blog/2013/03/19/post-google-rss-reader-era">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/smonffadds.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -52,7 +52,7 @@ So what? Do we really need it anyway? You can find plenty of friendly and beauti
   
 <form action="http://ddg.gg/?q=%s" method="get">
   <fieldset role="search">
-    <input type="hidden" name="q" value="site:smonff.github.com" />
+    <input type="hidden" name="q" value="site:smonff.github.io" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -87,6 +87,8 @@ So what? Do we really need it anyway? You can find plenty of friendly and beauti
 
 
 <time datetime="2013-03-19T14:29:00+01:00" pubdate data-updated="true">Mar 19<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
     
@@ -148,9 +150,13 @@ that I was feeling asleep as waiting for a feed to load. I don&#8217;t notice an
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://smonff.github.com/blog/2013/03/19/post-google-rss-reader-era/" data-via="sfeug" data-counturl="http://smonff.github.com/blog/2013/03/19/post-google-rss-reader-era/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://smonff.github.io/blog/2013/03/19/post-google-rss-reader-era/" data-via="sfeug" data-counturl="http://smonff.github.io/blog/2013/03/19/post-google-rss-reader-era/" >Tweet</a>
   
   
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
   
 </div>
 
@@ -165,6 +171,12 @@ that I was feeling asleep as waiting for a feed to load. I don&#8217;t notice an
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -193,6 +205,35 @@ that I was feeling asleep as waiting for a feed to load. I don&#8217;t notice an
   </ul>
 </section>
 
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/smonff">@smonff</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'smonff',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
 
 
 
@@ -213,8 +254,41 @@ that I was feeling asleep as waiting for a feed to load. I don&#8217;t notice an
 </footer>
   
 
+<script type="text/javascript">
+      var disqus_shortname = 'smonff';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://smonff.github.io/blog/2013/03/19/post-google-rss-reader-era/';
+        var disqus_url = 'http://smonff.github.io/blog/2013/03/19/post-google-rss-reader-era/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
 
 
 
