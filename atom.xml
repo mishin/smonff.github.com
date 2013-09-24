@@ -4,7 +4,7 @@
   <title><![CDATA[Smonff Shurfs]]></title>
   <link href="http://smonff.github.io/atom.xml" rel="self"/>
   <link href="http://smonff.github.io/"/>
-  <updated>2013-09-24T23:08:30+02:00</updated>
+  <updated>2013-09-24T23:21:36+02:00</updated>
   <id>http://smonff.github.io/</id>
   <author>
     <name><![CDATA[Smonff]]></name>
@@ -28,11 +28,11 @@
 
 <p>When testing a module and building a distribution, you maybe don&#8217;t want to inject <em>dirt</em> in your tests output. In the case of debuging, I think it&#8217;s a good thing to write it to a file and <code>tail</code> on it.</p>
 
-<p>We&#8217;re gonna use two CPAN&#8217;s modules, <a href="https://metacpan.org/module/Log::Minimal">Log::Minimal</a>, a <em>minimal but custimizable logger</em> and <a href="https://metacpan.org/module/File::Stamped">File::Stamped</a>, that allows <em>stamped log file</em>. They are not supposed to be build together, but Tokuhiro Matsuno(File::Stamped creator) recommend Log::Minimal in a code example.</p>
+<p>We&#8217;re gonna use two CPAN&#8217;s modules, <a href="https://metacpan.org/module/Log::Minimal">Log::Minimal</a>, a <em>minimal but custimizable logger</em> and <a href="https://metacpan.org/module/File::Stamped">File::Stamped</a>, that allows <em>stamped log file</em>. They are not supposed to be build together, but Tokuhiro Matsuno(<code>File::Stamped</code> creator) recommend <code>Log::Minimal</code> in a code example.</p>
 
-<p>My aim was to create a log system for the debug moment, because I was boring of using <code>p()</code> function from <a href="https://metacpan.org/module/Data::Printer">Data::Printer</a> during my development and tests, because it was a bad thing: I was constantly adding and moving debug-print code, that is a bad practice. I took a look at CPAN and Stack Overflow for some logging solutions, and <a href="https://metacpan.org/module/Log::Log4perl">Log::Log4Perl</a> seems to be a recommended solution for most of serious apps. But it seems to much complicated to me, I don&#8217;t want to manage a new conf file, etc.</p>
+<p>My aim was to create a log system for the debug moment, because I was boring of using <code>p()</code> function from <a href="https://metacpan.org/module/Data::Printer">Data::Printer</a> during my development and tests, because it was a bad thing: I was constantly adding and moving debug-print-code, that is a bad practice because it makes you repeat stupid tasks and encourage to test in a random way. I took a look at CPAN and Stack Overflow for some logging solutions, and <a href="https://metacpan.org/module/Log::Log4perl">Log::Log4Perl</a> seems to be a recommended solution for most of serious apps. But it seems to much complicated to me, I don&#8217;t want to manage a new conf file, etc.</p>
 
-<p>As <code>Log::Minimal</code> seems to be really simple to use, so I&#8217;ve installed it and was very satisfacted very quickly. Now, we are going to see how to use it to create a temporary file that will contain the traces.</p>
+<p>As <code>Log::Minimal</code> seems to be really simple to use, I&#8217;ve installed it and was very satisfacted of it quickly. Now, we are going to see how to use it to create a temporary file that will contain the traces.</p>
 
 <figure class='code'><figcaption><span>Install the modules :D</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cpanm Log::Minimal File::Stamped
@@ -60,6 +60,9 @@
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
 </pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">use</span> <span class="nn">Log::</span><span class="n">Minimal</span><span class="p">;</span>
 </span><span class='line'><span class="k">use</span> <span class="nn">File::</span><span class="n">Stamped</span><span class="p">;</span>
 </span><span class='line'>
@@ -79,6 +82,9 @@
 </span><span class='line'><span class="p">};</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">debugf</span><span class="p">(</span><span class="s">&quot;My::Module debugger init.&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="n">debugf</span><span class="p">(</span><span class="s">&quot;Other&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="n">debugf</span><span class="p">(</span><span class="s">&quot;interestant&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="n">debugf</span><span class="p">(</span><span class="s">&quot;things...&quot;</span><span class="p">);</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -101,7 +107,7 @@
 </span><span class='line'>2013-09-24T19:28:39 [DEBUG] things...</span></code></pre></td></tr></table></div></figure>
 
 
-<p>That was a very <em>minimal</em> blog post, but I hope it will be usefull.</p>
+<p>That was a very <em>minimal</em> blog post, but I hope it could be usefull.</p>
 ]]></content>
   </entry>
   

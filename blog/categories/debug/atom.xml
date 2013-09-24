@@ -4,7 +4,7 @@
   <title><![CDATA[Category: debug | Smonff Shurfs]]></title>
   <link href="http://smonff.github.io/blog/categories/debug/atom.xml" rel="self"/>
   <link href="http://smonff.github.io/"/>
-  <updated>2013-09-24T23:08:30+02:00</updated>
+  <updated>2013-09-24T23:21:36+02:00</updated>
   <id>http://smonff.github.io/</id>
   <author>
     <name><![CDATA[Smonff]]></name>
@@ -28,11 +28,11 @@
 
 <p>When testing a module and building a distribution, you maybe don't want to inject <em>dirt</em> in your tests output. In the case of debuging, I think it's a good thing to write it to a file and <code>tail</code> on it.</p>
 
-<p>We're gonna use two CPAN's modules, <a href="https://metacpan.org/module/Log::Minimal">Log::Minimal</a>, a <em>minimal but custimizable logger</em> and <a href="https://metacpan.org/module/File::Stamped">File::Stamped</a>, that allows <em>stamped log file</em>. They are not supposed to be build together, but Tokuhiro Matsuno(File::Stamped creator) recommend Log::Minimal in a code example.</p>
+<p>We're gonna use two CPAN's modules, <a href="https://metacpan.org/module/Log::Minimal">Log::Minimal</a>, a <em>minimal but custimizable logger</em> and <a href="https://metacpan.org/module/File::Stamped">File::Stamped</a>, that allows <em>stamped log file</em>. They are not supposed to be build together, but Tokuhiro Matsuno(<code>File::Stamped</code> creator) recommend <code>Log::Minimal</code> in a code example.</p>
 
-<p>My aim was to create a log system for the debug moment, because I was boring of using <code>p()</code> function from <a href="https://metacpan.org/module/Data::Printer">Data::Printer</a> during my development and tests, because it was a bad thing: I was constantly adding and moving debug-print code, that is a bad practice. I took a look at CPAN and Stack Overflow for some logging solutions, and <a href="https://metacpan.org/module/Log::Log4perl">Log::Log4Perl</a> seems to be a recommended solution for most of serious apps. But it seems to much complicated to me, I don't want to manage a new conf file, etc.</p>
+<p>My aim was to create a log system for the debug moment, because I was boring of using <code>p()</code> function from <a href="https://metacpan.org/module/Data::Printer">Data::Printer</a> during my development and tests, because it was a bad thing: I was constantly adding and moving debug-print-code, that is a bad practice because it makes you repeat stupid tasks and encourage to test in a random way. I took a look at CPAN and Stack Overflow for some logging solutions, and <a href="https://metacpan.org/module/Log::Log4perl">Log::Log4Perl</a> seems to be a recommended solution for most of serious apps. But it seems to much complicated to me, I don't want to manage a new conf file, etc.</p>
 
-<p>As <code>Log::Minimal</code> seems to be really simple to use, so I've installed it and was very satisfacted very quickly. Now, we are going to see how to use it to create a temporary file that will contain the traces.</p>
+<p>As <code>Log::Minimal</code> seems to be really simple to use, I've installed it and was very satisfacted of it quickly. Now, we are going to see how to use it to create a temporary file that will contain the traces.</p>
 
 <p><code>bash Install the modules :D
 $ cpanm Log::Minimal File::Stamped
@@ -59,6 +59,9 @@ my $tmp = '/tmp';</p>
 };</p>
 
 <p>debugf("My::Module debugger init.");
+debugf("Other");
+debugf("interestant");
+debugf("things...");
 <code>``
 If you</code>tail<code>to</code>/tmp/log.2013-09-24.out` from your terminal during your module tests...</p>
 
@@ -75,7 +78,7 @@ $ tail -vf /tmp/log.2013-09-24.out
 2013-09-24T19:28:39 [DEBUG] things...
 </code></p>
 
-<p>That was a very <em>minimal</em> blog post, but I hope it will be usefull.</p>
+<p>That was a very <em>minimal</em> blog post, but I hope it could be usefull.</p>
 ]]></content>
   </entry>
   
