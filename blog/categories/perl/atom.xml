@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: perl | Smonff Shurfs]]></title>
-  <link href="http://smonff.github.com/blog/categories/perl/atom.xml" rel="self"/>
-  <link href="http://smonff.github.com/"/>
-  <updated>2013-09-24T22:10:52+02:00</updated>
-  <id>http://smonff.github.com/</id>
+  <link href="http://smonff.github.io/blog/categories/perl/atom.xml" rel="self"/>
+  <link href="http://smonff.github.io/"/>
+  <updated>2013-09-24T22:18:01+02:00</updated>
+  <id>http://smonff.github.io/</id>
   <author>
     <name><![CDATA[Smonff]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[How to log easily with Log::Minimal and File::Stamped]]></title>
-    <link href="http://smonff.github.com/blog/2013/09/24/how-to-log-easily-with-log-minimal-and-file-stamped/"/>
+    <link href="http://smonff.github.io/blog/2013/09/24/how-to-log-easily-with-log-minimal-and-file-stamped/"/>
     <updated>2013-09-24T18:00:00+02:00</updated>
-    <id>http://smonff.github.com/blog/2013/09/24/how-to-log-easily-with-log-minimal-and-file-stamped</id>
+    <id>http://smonff.github.io/blog/2013/09/24/how-to-log-easily-with-log-minimal-and-file-stamped</id>
     <content type="html"><![CDATA[<p>We love logs because it helps us to debug during development. We also need a quick way to enable / disable logs because it's not necessary for everybody :</p>
 
 <ul>
@@ -32,7 +32,7 @@
 
 <p>My aim was to create a log system for the debug moment, because I was boring of using <code>p()</code> function from <a href="https://metacpan.org/module/Data::Printer">Data::Printer</a> during my development and tests, because it was a bad thing: I was constantly adding and moving debug-print code, that is a bad practice. I took a look at CPAN and Stack Overflow for some logging solutions, and <a href="https://metacpan.org/module/Log::Log4perl">Log::Log4Perl</a> seems to be a recommended solution for most of serious apps. But it seems to much complicated to me, I don't want to manage a new conf file, etc.</p>
 
-<p>As <code>Log::Minimal</code> seems to be really simple, I've installed and was very satisfacted very quickly. Now, We are going to see how to use it to create a temporary file that will contain my traces.</p>
+<p>As <code>Log::Minimal</code> seems to be really simple to use, so I've installed it and was very satisfacted very quickly. Now, we are going to see how to use it to create a temporary file that will contain the traces.</p>
 
 <p><code>bash Install the modules :D
 $ cpanm Log::Minimal File::Stamped
